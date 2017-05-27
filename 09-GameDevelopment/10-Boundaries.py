@@ -92,6 +92,9 @@ def mainLoop():
 
         snake(snakeList)
 
+        if x > width or x < 0 or y > height or y < 0:
+            gameOver = True
+
         pygame.display.update()
 
         if rect_2.colliderect(rect_1):
