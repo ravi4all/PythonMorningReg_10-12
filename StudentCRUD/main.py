@@ -16,12 +16,14 @@ def deleteStudent():
     toDelete = int(input("Enter student ID to delete : "))
 
     #index_of_toDelete = studentList.index(toDelete-1)
-    
-    del(studentList[toDelete-1])
+    try:
+        del(studentList[toDelete-1])
+        print("Updated Student List")
+        for s in studentList:
+            print(s)
 
-    print("Updated Student List")
-    for s in studentList:
-        print(s)
+    except:
+        print("Student do not exist")
 
 
 def readStudent():
@@ -30,6 +32,20 @@ def readStudent():
 
 def updateStudent():
     pass
+
+def saveStudent():
+    file = open("StudentList.txt",'a+')
+    for student in studentList:
+        s = str(student).strip("[]")
+        file.write(s+"\n")
+    print("Written Data Successfully")
+    file.close()
+
+def loadStudent():
+    file = open("StudentList.txt",'r')
+    a = file.read()
+    print("Data Loaded")
+    print(a)
 
 def errHandler():
     print("Wrong choice, Press Again")
@@ -45,7 +61,9 @@ while mainLoop:
 2. Delete Student
 3. Read Students
 4. Update Student
-5. Quit
+5. Save Student
+6. Load Student
+q. Quit
 """)
 
     choice = input("Enter your choice : ")
@@ -55,6 +73,8 @@ while mainLoop:
         "2" : deleteStudent,
         "3" : readStudent,
         "4" : updateStudent,
-        "5" : quit}
+        "5" : saveStudent,
+        "6" : loadStudent,
+        "q" : quit}
 
     todo.get(choice, errHandler)()
